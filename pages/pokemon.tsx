@@ -33,20 +33,19 @@ const Pokemon = ({ pokemons }: pokemons) => {
               <div
                 key={pokemon.name}
                 className="flex flex-col justify-center items-center pokemon-card"
-              >
+                >
+                    
+                <Image
+                  src={imageUrl}
+                  alt={pokemon.name}
+                  width={100}
+                  height={100}
+                />
                 <div className="circle"></div>
                 <h5 className="poke-id">{pokemonId}</h5>
                 <h5 className="poke-name">
                   {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
                 </h5>
-                <div>
-                  <Image
-                    src={imageUrl}
-                    alt={pokemon.name}
-                    width={100}
-                    height={100}
-                  />
-                </div>
               </div>
             );
           })}
