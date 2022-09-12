@@ -21,6 +21,63 @@ type pokemon = {
 };
 
 const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
+  const bgColors: any = {
+    grass: {
+      bgColor: "bg-grass",
+    },
+    poison: {
+      bgColor: "bg-poison",
+    },
+    fire: {
+      bgColor: "bg-fire",
+    },
+    flying: {
+      bgColor: "bg-flying",
+    },
+    water: {
+      bgColor: "bg-water",
+    },
+    bug: {
+      bgColor: "bg-bug",
+    },
+    normal: {
+      bgColor: "bg-normal",
+    },
+    electric: {
+      bgColor: "bg-electric",
+    },
+    ground: {
+      bgColor: "bg-ground",
+    },
+    fairy: {
+      bgColor: "bg-fairy",
+    },
+    fighting: {
+      bgColor: "bg-fighting",
+    },
+    psychic: {
+      bgColor: "bg-psychic",
+    },
+    rock: {
+      bgColor: "bg-rock",
+    },
+    ghost: {
+      bgColor: "bg-ghost",
+    },
+    ice: {
+      bgColor: "bg-ice",
+    },
+    dragon: {
+      bgColor: "bg-dragon",
+    },
+    steel: {
+      bgColor: "bg-steel",
+    },
+    dark: {
+      bgColor: "bg-dark",
+    },
+  };
+
   const pokemonTypes = (types: pokemon["types"]) => {
     return types.map((type) => type.type.name);
   };
@@ -43,8 +100,8 @@ const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
             return (
               <div
                 key={pokemon.name}
-                className={`flex flex-col justify-center items-center pokemon-card color_${
-                  pokemonTypes(pokemon.types)[0]
+                className={`flex flex-col justify-center items-center pokemon-card ${
+                  bgColors[pokemonTypes(pokemon.types)[0]].bgColor
                 }`}
               >
                 <div className="mb-1">
