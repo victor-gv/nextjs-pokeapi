@@ -1,19 +1,33 @@
 import React from "react";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import Link from "next/link";
 
-type pokemons = {
-  pokemons: [
-    {
+type pokemon = {
+  name: string;
+  id: number;
+  url: string;
+  sprites: {
+    other: {
+      "official-artwork": {
+        front_default: string;
+      };
+    };
+  };
+  types: {
+    type: {
       name: string;
-      url: string;
-    }
-  ];
+    };
+  }[];
 };
 
-const Pokemon = ({ pokemons }: pokemons) => {
+const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
+  const pokemonTypes = (types: pokemon["types"]) => {
+    return types
+      .map((type) => type.type.name)
+      .join(" / ")
+      .replace(/\b\w/g, (ch) => ch.toUpperCase());
+  };
+
   return (
     <>
       <Head>
@@ -26,9 +40,9 @@ const Pokemon = ({ pokemons }: pokemons) => {
           Pokédex
         </h1>
         <div className="flex flex-wrap justify-center mx-10 bg-bg-main">
-          {pokemons.map((pokemon: { name: string; url: string }) => {
-            const pokemonId = pokemon.url.split("/")[6];
-            const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
+          {pokemons.map((pokemon: pokemon) => {
+            const imageUrl =
+              pokemon.sprites.other["official-artwork"].front_default;
             return (
               <div
                 key={pokemon.name}
@@ -43,10 +57,11 @@ const Pokemon = ({ pokemons }: pokemons) => {
                   />
                 </div>
                 <div className="circle"></div>
-                <h5 className="poke-id">{pokemonId}</h5>
+                <h5 className="poke-id">{pokemon.id}</h5>
                 <h5 className="poke-name">
                   {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
                 </h5>
+                <span>{pokemonTypes(pokemon.types)}</span>
               </div>
             );
           })}
@@ -57,14 +72,19 @@ const Pokemon = ({ pokemons }: pokemons) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
-  );
-  const data = await res.json();
+  const responses = [];
+
+  for (let i = 1; i <= 151; i++) {
+    const response = fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+    responses.push(response);
+  }
+
+  const proms = await Promise.all(responses);
+  const pokemons = await Promise.all(proms.map((res) => res.json()));
 
   return {
     props: {
-      pokemons: data.results,
+      pokemons: pokemons,
     },
   };
 }
