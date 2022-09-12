@@ -33,14 +33,15 @@ const Pokemon = ({ pokemons }: pokemons) => {
               <div
                 key={pokemon.name}
                 className="flex flex-col justify-center items-center pokemon-card"
-                >
-                    
-                <Image
-                  src={imageUrl}
-                  alt={pokemon.name}
-                  width={100}
-                  height={100}
-                />
+              >
+                <div className="mb-1">
+                  <Image
+                    src={imageUrl}
+                    alt={pokemon.name}
+                    width={100}
+                    height={100}
+                  />
+                </div>
                 <div className="circle"></div>
                 <h5 className="poke-id">{pokemonId}</h5>
                 <h5 className="poke-name">
