@@ -22,18 +22,16 @@ const Pokemon = ({ pokemons }: pokemons) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Link href="/">
-        <h1 className={styles.title}>Poke API</h1>
+        <h1>Poke API</h1>
       </Link>
-      <div className={`${styles.grid} ${styles.container}`}>
+      <div className="grid grid-cols-5">
         {pokemons.map((pokemon: { name: string; url: string }) => {
           const pokemonId = pokemon.url.split("/")[6];
           const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
           return (
-            <div key={pokemon.name} className={styles.card}>
-              <p className={styles.title}>
-                {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
-              </p>
-              <div className={styles.title}>
+            <div key={pokemon.name}>
+              <p>{pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}</p>
+              <div>
                 <Image
                   src={imageUrl}
                   alt={pokemon.name}
