@@ -22,10 +22,7 @@ type pokemon = {
 
 const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
   const pokemonTypes = (types: pokemon["types"]) => {
-    return types
-      .map((type) => type.type.name)
-      .join(" / ")
-      .replace(/\b\w/g, (ch) => ch.toUpperCase());
+    return types.map((type) => type.type.name);
   };
 
   return (
@@ -46,7 +43,9 @@ const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
             return (
               <div
                 key={pokemon.name}
-                className="flex flex-col justify-center items-center pokemon-card"
+                className={`flex flex-col justify-center items-center pokemon-card color_${
+                  pokemonTypes(pokemon.types)[0]
+                }`}
               >
                 <div className="mb-1">
                   <Image
@@ -57,11 +56,15 @@ const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
                   />
                 </div>
                 <div className="circle"></div>
-                <h5 className="poke-id">{pokemon.id}</h5>
+                <h5 className="poke-id">#{pokemon.id}</h5>
                 <h5 className="poke-name">
                   {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
                 </h5>
-                <span>{pokemonTypes(pokemon.types)}</span>
+                <span>
+                  {pokemonTypes(pokemon.types)
+                    .join(" / ")
+                    .replace(/\b\w/g, (ch) => ch.toUpperCase())}
+                </span>
               </div>
             );
           })}
