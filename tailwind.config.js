@@ -7,7 +7,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        4: "repeat(auto-fit, minmax(14rem, 1fr))",
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 };

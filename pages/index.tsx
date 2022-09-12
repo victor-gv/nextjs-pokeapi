@@ -6,7 +6,7 @@ import PageLayout from "../components/PageLayout";
 const Home: NextPage = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-screen">
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-800">
         <PageLayout>
           <Head>
             <title>Poke NextJS</title>
