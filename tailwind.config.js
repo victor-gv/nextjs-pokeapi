@@ -30,6 +30,9 @@ module.exports = {
         ghost: "#dbbaff",
         dragon: "#c4bdff",
       },
+      fontFamily: {
+        luckiest: ["Luckiest Guy"],
+      },
     },
   },
   plugins: [require("flowbite/plugin")],

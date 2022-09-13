@@ -55,7 +55,7 @@ const Pokedex = ({ pokemons }: { pokemons: pokemon[] }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-gray-800">
-        <h1 className="flex justify-center pt-10 text-3xl font-bold mb-5 text-sky-500">
+        <h1 className="flex justify-center pt-10 mb-5 font-bold font-luckiest text-6xl text-yellow-300 title ">
           Pokédex
         </h1>
         <div className="flex flex-wrap justify-center mx-10 bg-bg-main">
