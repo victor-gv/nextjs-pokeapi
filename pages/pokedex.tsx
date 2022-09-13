@@ -20,7 +20,7 @@ type pokemon = {
   }[];
 };
 
-const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
+const Pokedex = ({ pokemons }: { pokemons: pokemon[] }) => {
   const bgColors: any = {
     grass: "bg-grass",
     poison: "bg-poison",
@@ -64,9 +64,9 @@ const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
             return (
               <div
                 key={pokemon.name}
-                className={`flex flex-col justify-center items-center pokemon-card ${
-                  bgColors[pokemonTypes(pokemon.types)[0]]
-                }`}
+                className={`flex flex-col justify-center items-center pokemon-card hover:scale-105
+                
+                ${bgColors[pokemonTypes(pokemon.types)[0]]}`}
               >
                 <div className="mb-1">
                   <Image
@@ -113,4 +113,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default Pokemon;
+export default Pokedex;
