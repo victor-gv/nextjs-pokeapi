@@ -22,60 +22,24 @@ type pokemon = {
 
 const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
   const bgColors: any = {
-    grass: {
-      bgColor: "bg-grass",
-    },
-    poison: {
-      bgColor: "bg-poison",
-    },
-    fire: {
-      bgColor: "bg-fire",
-    },
-    flying: {
-      bgColor: "bg-flying",
-    },
-    water: {
-      bgColor: "bg-water",
-    },
-    bug: {
-      bgColor: "bg-bug",
-    },
-    normal: {
-      bgColor: "bg-normal",
-    },
-    electric: {
-      bgColor: "bg-electric",
-    },
-    ground: {
-      bgColor: "bg-ground",
-    },
-    fairy: {
-      bgColor: "bg-fairy",
-    },
-    fighting: {
-      bgColor: "bg-fighting",
-    },
-    psychic: {
-      bgColor: "bg-psychic",
-    },
-    rock: {
-      bgColor: "bg-rock",
-    },
-    ghost: {
-      bgColor: "bg-ghost",
-    },
-    ice: {
-      bgColor: "bg-ice",
-    },
-    dragon: {
-      bgColor: "bg-dragon",
-    },
-    steel: {
-      bgColor: "bg-steel",
-    },
-    dark: {
-      bgColor: "bg-dark",
-    },
+    grass: "bg-grass",
+    poison: "bg-poison",
+    fire: "bg-fire",
+    flying: "bg-flying",
+    water: "bg-water",
+    bug: "bg-bug",
+    normal: "bg-normal",
+    electric: "bg-electric",
+    ground: "bg-ground",
+    fairy: "bg-fairy",
+    fighting: "bg-fighting",
+    psychic: "bg-psychic",
+    rock: "bg-rock",
+    ghost: "bg-ghost",
+    ice: "bg-ice",
+    dragon: "bg-dragon",
+    steel: "bg-steel",
+    dark: "bg-dark",
   };
 
   const pokemonTypes = (types: pokemon["types"]) => {
@@ -101,7 +65,7 @@ const Pokemon = ({ pokemons }: { pokemons: pokemon[] }) => {
               <div
                 key={pokemon.name}
                 className={`flex flex-col justify-center items-center pokemon-card ${
-                  bgColors[pokemonTypes(pokemon.types)[0]].bgColor
+                  bgColors[pokemonTypes(pokemon.types)[0]]
                 }`}
               >
                 <div className="mb-1">
