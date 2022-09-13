@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 type pokemon = {
   name: string;
@@ -62,31 +63,33 @@ const Pokedex = ({ pokemons }: { pokemons: pokemon[] }) => {
             const imageUrl =
               pokemon.sprites.other["official-artwork"].front_default;
             return (
-              <div
-                key={pokemon.name}
-                className={`flex flex-col justify-center items-center pokemon-card hover:scale-105
+              <Link key={pokemon.id} href={`/pokemon/${pokemon.id}`}>
+                <div
+                  key={pokemon.name}
+                  className={`flex flex-col justify-center items-center pokemon-card hover:scale-105
                 
-                ${bgColors[pokemonTypes(pokemon.types)[0]]}`}
-              >
-                <div className="mb-1">
-                  <Image
-                    src={imageUrl}
-                    alt={pokemon.name}
-                    width={100}
-                    height={100}
-                  />
+                  ${bgColors[pokemonTypes(pokemon.types)[0]]}`}
+                >
+                  <div className="mb-1">
+                    <Image
+                      src={imageUrl}
+                      alt={pokemon.name}
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+                  <div className="circle"></div>
+                  <h5 className="poke-id">#{pokemon.id}</h5>
+                  <h5 className="poke-name">
+                    {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
+                  </h5>
+                  <span>
+                    {pokemonTypes(pokemon.types)
+                      .join(" / ")
+                      .replace(/\b\w/g, (ch) => ch.toUpperCase())}
+                  </span>
                 </div>
-                <div className="circle"></div>
-                <h5 className="poke-id">#{pokemon.id}</h5>
-                <h5 className="poke-name">
-                  {pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
-                </h5>
-                <span>
-                  {pokemonTypes(pokemon.types)
-                    .join(" / ")
-                    .replace(/\b\w/g, (ch) => ch.toUpperCase())}
-                </span>
-              </div>
+              </Link>
             );
           })}
         </div>
