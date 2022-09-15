@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 /* html,
 body {
   padding: 0;
@@ -28,7 +27,6 @@ a {
     background: black;
   }
 } */
-
 @font-face {
   font-family: "Luckiest Guy";
   font-style: normal;
@@ -39,30 +37,23 @@ a {
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
 }
-
 @layer components {
   .pokemon-card {
     position: relative;
     z-index: 100;
-
     height: 18rem;
     width: 12rem;
-
     margin: 20px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
     border: 7px solid #fff;
     border-radius: 20px;
     background-color: #c2f3ff;
-
     cursor: pointer;
   }
-
   .poke-id {
     margin-top: 20px;
     border-radius: 25px;
@@ -70,11 +61,9 @@ a {
     font-size: 1.1rem;
     background: rgba(0, 0, 0, 0.2);
   }
-
   img {
-    width: 70%;
+    width: min-content;
   }
-
   .circle {
     padding: 65px;
     position: absolute;
@@ -83,12 +72,178 @@ a {
     top: 6%;
     z-index: -1;
   }
-
   .poke-name {
     font-weight: bold;
   }
-
   .title {
     -webkit-text-stroke: 0.1rem blue;
   }
-}
+  .card {
+    display: inline-block;
+    width: 300px;
+    padding: 1em;
+    border-radius: 15px;
+    margin: 10px;
+    background: #ddd;
+    text-align: left;
+    box-shadow: 0px 5px 20px -10px #111111;
+    position: relative;
+    transition: 0.4s;
+  }
+  .card__caption {
+    background-color: rgba(255, 255, 255, 0.65);
+    padding: 1em;
+    position: relative;
+    border-radius: 0 0 3px 3px;
+  }
+  .card__image-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    padding: 1em 1em 0;
+    border-radius: 3px 3px 0 0;
+  }
+  .card__type {
+    position: absolute;
+    top: 0;
+    right: 1em;
+    /* transform: translateY(-50%); */
+    color: #ffffff;
+    text-transform: uppercase;
+    font-family: "Open Sans Condensed", "Open Sans", helvetica, sans-serif;
+    letter-spacing: 0.1em;
+    padding: 0.25em;
+    line-height: 1;
+    border-radius: 2px;
+    background: #bbbbbb;
+  }
+  .card__label {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .card__name {
+    font-family: "Open Sans Condensed", "Open Sans", helvetica, sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .card__stats {
+    margin: 1em 0;
+    width: 100%;
+  }
+  .card__stats th {
+    font-family: "Open Sans Condensed", "Open Sans", helvetica, sans-serif;
+    text-align: right;
+    font-weight: 300;
+  }
+  .card__stats th,
+  .card__stats td {
+    width: 50%;
+    padding: 0.25em 0.5em 0;
+  }
+  .card__abilities {
+    display: flex;
+    justify-content: space-between;
+  }
+  .card__ability {
+    margin-top: 1em;
+    flex: 1 0;
+  }
+  .card--normal {
+    background: linear-gradient(110deg, #fdbb2d 0%, #3a1c71 100%);
+    box-shadow: 0px 5px 20px -10px #3a1c71;
+  }
+  .card--normal .card__type {
+    background-color: #c08a53;
+  }
+  .card--water {
+    background: linear-gradient(120deg, #1cb5e0 0%, #000851 100%);
+    box-shadow: 0px 5px 20px -10px #000851;
+  }
+  .card--water .card__type {
+    background-color: #1cb5e0;
+  }
+  .card--electric {
+    background: linear-gradient(
+      90deg,
+      rgb(255, 222, 0) 34%,
+      rgb(232, 255, 153) 83%
+    );
+  }
+  .card--electric .card__type {
+    background-color: #000;
+  }
+  .card--fire {
+    background: linear-gradient(
+      0deg,
+      rgb(199, 24, 0) 10%,
+      rgb(252, 194, 69) 100%
+    );
+  }
+  .card--fire .card__type {
+    background-color: rgb(199, 24, 0);
+  }
+  .card--psychic {
+    background: linear-gradient(
+      140deg,
+      rgb(255, 167, 249) 0%,
+      rgb(255, 44, 195) 39%,
+      rgb(255, 227, 167) 100%
+    );
+  }
+  .card--psychic .card__type {
+    background: #ff2cc3;
+  }
+  .card--dark {
+    background: linear-gradient(
+      20deg,
+      rgb(25, 25, 25) 0%,
+      rgb(16, 11, 50) 33%,
+      rgb(92, 2, 73) 100%
+    );
+  }
+  .card--dark .card__type {
+    background: #5c0249;
+  }
+  .card--grass {
+    background: linear-gradient(
+      140deg,
+      rgb(196, 218, 61) 0%,
+      rgb(110, 127, 14) 69%,
+      rgb(39, 80, 9) 100%
+    );
+  }
+  .card--grass .card__type {
+    background: #6e7f0e;
+  }
+  .card--ice {
+    background: linear-gradient(
+      230deg,
+      rgb(202, 234, 246) 0%,
+      rgb(160, 234, 241) 46%,
+      rgb(111, 184, 235) 100%
+    );
+  }
+  .card--ice .card__type {
+    background: #6fb8eb;
+  }
+  .card--fairy {
+    background: linear-gradient(
+      45deg,
+      rgb(255, 230, 240) 0%,
+      rgb(255, 197, 224) 34%,
+      rgb(255, 166, 185) 71%,
+      rgb(255, 138, 149) 100%
+    );
+  }
+  .card--fairy .card__type {
+    background: #ff8a95;
+  }
+  
+  .card:hover {
+    transform: scale(1.1);
+  }
+} /*# sourceMappingURL=globals.css.map */
