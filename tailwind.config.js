@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   mode: "jit",
   content: [
@@ -8,9 +8,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      gridTemplateColumns: {
-        4: "repeat(auto-fit, minmax(14rem, 1fr))",
-      },
       backgroundColor: {
         grass: "#d2f2c2",
         poison: "#f7cdf7",

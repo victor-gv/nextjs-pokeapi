@@ -20,6 +20,7 @@ const Pokemons = (pokemon: PokemonResults) => {
     return typeColor;
   }
 
+
   const pokemonList = pokemon.pokemon;
 
   return (
@@ -47,8 +48,9 @@ const Pokemons = (pokemon: PokemonResults) => {
               <Link key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
                 <div
                   key={pokemon.name}
-                  className={`flex flex-col justify-center items-center pokemon-card hover:scale-105
-                  bg-${getType(pokemonId)?.at(0)}`}
+                  className={`flex flex-col justify-center items-center pokemon-card hover:scale-105 bg-${getType(
+                    pokemonId
+                  )?.at(0)}`}
                 >
                   <div className="mb-1">
                     <Image
