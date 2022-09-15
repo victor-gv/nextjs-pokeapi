@@ -43,6 +43,16 @@ const Pokemon = (pokemon: any) => {
   const pokemonType = pokemon.pokemon.types[0].type.name;
   const pokemonImg =
     pokemon.pokemon.sprites.other["official-artwork"].front_default;
+  const hp = pokemon.pokemon.stats[0].base_stat;
+  const attack = pokemon.pokemon.stats[1].base_stat;
+  const defense = pokemon.pokemon.stats[2].base_stat;
+  const specialAttack = pokemon.pokemon.stats[3].base_stat;
+  const specialDefense = pokemon.pokemon.stats[4].base_stat;
+  const speed = pokemon.pokemon.stats[5].base_stat;
+  const ability = pokemon.pokemon.abilities[0].ability.name;
+  const hiddenAbility = pokemon.pokemon.abilities[1]?.ability.name
+    ? pokemon.pokemon.abilities[1].ability.name
+    : "None";
 
   return (
     <>
@@ -69,29 +79,29 @@ const Pokemon = (pokemon: any) => {
               <tbody>
                 <tr>
                   <th>HP</th>
-                  <td>95</td>
+                  <td>{hp}</td>
                 </tr>
                 <tr>
                   <th>Attack</th>
-                  <td>65</td>
+                  <td>{attack}</td>
                 </tr>
 
                 <tr>
                   <th>Defense</th>
-                  <td>65</td>
+                  <td>{defense}</td>
                 </tr>
 
                 <tr>
                   <th>Special Attack</th>
-                  <td>110</td>
+                  <td>{specialAttack}</td>
                 </tr>
                 <tr>
                   <th>Special Defense</th>
-                  <td>130</td>
+                  <td>{specialDefense}</td>
                 </tr>
                 <tr>
                   <th>Speed</th>
-                  <td>60</td>
+                  <td>{speed}</td>
                 </tr>
               </tbody>
             </table>
@@ -99,11 +109,11 @@ const Pokemon = (pokemon: any) => {
             <div className="card__abilities">
               <h4 className="card__ability">
                 <span className="card__label">Ability</span>
-                Cute Charm
+                {ability.charAt(0).toUpperCase() + hiddenAbility.slice(1)}
               </h4>
-              <h4 className="card__ability">
+              <h4 className="card__ability text-right">
                 <span className="card__label">Hidden Ability</span>
-                Pixilate
+                {hiddenAbility.charAt(0).toUpperCase() + hiddenAbility.slice(1)}
               </h4>
             </div>
           </figcaption>
@@ -114,24 +124,22 @@ const Pokemon = (pokemon: any) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const req = await fetch("https://pokeapi.co/api/v2/pokemon");
-  const res = await req.json();
+  const req = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+  const { results } = await req.json();
 
-  const paths = res.results.map((pokemon: Pokemon) => {
-    return {
-      params: { name: pokemon.name },
-    };
-  });
+  const paths = results.map((pokemon: Pokemon) => ({
+    params: { name: pokemon.name },
+  }));
 
   return {
-    paths: paths,
-    fallback: false, // can also be true or 'blocking'
+    paths,
+    fallback: false,
   };
 };
 
 export async function getStaticProps(params: { params: { name: string } }) {
   const { name } = params.params;
-
+  console.log(name);
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const pokemon = await res.json();
 

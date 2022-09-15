@@ -69,7 +69,7 @@ const Pokemons = (pokemon: PokemonResults) => {
             const pokemonId: number = parseInt(pokemon.url.split("/")[6]);
             const imageUrl: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
             return (
-              <Link key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
+              <Link key={pokemon.name} href={`/pokedex/${pokemon.name}`}>
                 <div
                   key={pokemon.name}
                   className={`flex flex-col justify-center items-center pokemon-card hover:scale-105 bg-
