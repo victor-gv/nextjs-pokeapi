@@ -9,7 +9,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        grass: "#d2f2c2",
+        grass:
+          "#d2f2c2",
         poison: "#f7cdf7",
         fire: "#ffd1b5",
         flying: "#eae3ff",

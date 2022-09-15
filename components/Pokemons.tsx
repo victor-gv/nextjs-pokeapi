@@ -14,12 +14,36 @@ interface PokemonResults {
 }
 
 const Pokemons = (pokemon: PokemonResults) => {
-  function getType(id: number) {
+  function getType(id: number): string[] {
     const type = pokemon.types.find((type) => type.id === id);
-    const typeColor = type?.types;
-    return typeColor;
+    if (typeof type !== "undefined") {
+      const typeColor = type?.types;
+      return typeColor;
+    } else {
+      throw new Error("Type not found");
+    }
   }
 
+  const bgColors: { [key: string]: string } = {
+    grass: "bg-grass",
+    poison: "bg-poison",
+    fire: "bg-fire",
+    flying: "bg-flying",
+    water: "bg-water",
+    bug: "bg-bug",
+    normal: "bg-normal",
+    electric: "bg-electric",
+    ground: "bg-ground",
+    fairy: "bg-fairy",
+    fighting: "bg-fighting",
+    psychic: "bg-psychic",
+    rock: "bg-rock",
+    ghost: "bg-ghost",
+    ice: "bg-ice",
+    dragon: "bg-dragon",
+    steel: "bg-steel",
+    dark: "bg-dark",
+  };
 
   const pokemonList = pokemon.pokemon;
 
@@ -48,9 +72,9 @@ const Pokemons = (pokemon: PokemonResults) => {
               <Link key={pokemon.name} href={`/pokemon/${pokemon.name}`}>
                 <div
                   key={pokemon.name}
-                  className={`flex flex-col justify-center items-center pokemon-card hover:scale-105 bg-${getType(
-                    pokemonId
-                  )?.at(0)}`}
+                  className={`flex flex-col justify-center items-center pokemon-card hover:scale-105 bg-
+                  ${bgColors[getType(pokemonId)[0]]}
+                  `}
                 >
                   <div className="mb-1">
                     <Image
