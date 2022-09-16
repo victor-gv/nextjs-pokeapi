@@ -1,10 +1,10 @@
 import React from "react";
-import Pokemons from "../components/Pokemons";
+import Pokemons from "../components/PokemonsLayout";
 import fs from "fs";
 
-interface Props {
-  results: [{ name: string; url: string }];
-  data: [
+export interface Pokemons {
+  pokemon: [{ name: string; url: string }];
+  types: [
     {
       id: number;
       types: string[];
@@ -12,11 +12,11 @@ interface Props {
   ];
 }
 
-const Pokedex = (props: Props) => {
-  const { results, data } = props;
+const Pokedex = (props: Pokemons) => {
+  const { pokemon, types } = props;
   return (
     <>
-      <Pokemons pokemon={results} types={data} />
+      <Pokemons pokemon={pokemon} types={types} />
     </>
   );
 };
@@ -32,8 +32,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      results: res.results,
-      data: dataTypes,
+      pokemon: res.results,
+      types: dataTypes,
     },
   };
 }

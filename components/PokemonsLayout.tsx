@@ -2,18 +2,11 @@ import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { Pokemons } from "../pages/pokedex";
 
-interface PokemonResults {
-  pokemon: [{ name: string; url: string }];
-  types: [
-    {
-      id: number;
-      types: string[];
-    }
-  ];
-}
 
-const Pokemons = (pokemon: PokemonResults) => {
+
+const PokemonsLayout = (pokemon: Pokemons) => {
   function getType(id: number): string[] {
     const type = pokemon.types.find((type) => type.id === id);
     if (typeof type !== "undefined") {
@@ -106,4 +99,4 @@ const Pokemons = (pokemon: PokemonResults) => {
   );
 };
 
-export default Pokemons;
+export default PokemonsLayout;
