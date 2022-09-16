@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Pokemons } from "../pages/pokedex";
 
-
-
 const PokemonsLayout = (pokemon: Pokemons) => {
   function getType(id: number): string[] {
     const type = pokemon.types.find((type) => type.id === id);
