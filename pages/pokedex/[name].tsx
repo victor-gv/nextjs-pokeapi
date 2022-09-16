@@ -1,24 +1,43 @@
 import React from "react";
 import { GetStaticPaths } from "next";
 
+type Types = [
+  {
+    type: {
+      id: number;
+      name: string;
+    }
+  }
+]
+
 interface Pokemon {
-  name: string;
-  id: number;
-  abilities: {
-    ability: {
-      name: string;
+  pokemon: {
+    name: string;
+    id: number;
+    abilities: {
+      ability: {
+        name: string;
+      };
+    }[];
+    stats: {
+      stat: {
+        name: string;
+      };
+      base_stat: number;
+    }[];
+    base_experience: number;
+    sprites: {
+      other: {
+        "official-artwork": {
+          front_default: string;
+        };
+      };
     };
-  }[];
-  stats: {
-    stat: {
-      name: string;
-    };
-    base_stat: number;
-  }[];
-  base_experience: number;
+    types: Types;
+  };
 }
 
-const Pokemon = (pokemon: any) => {
+const Pokemon = (pokemon: Pokemon) => {
   const bgColors: { [key: string]: string } = {
     grass: "bg-grass",
     poison: "bg-poison",
@@ -127,7 +146,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const req = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
   const { results } = await req.json();
 
-  const paths = results.map((pokemon: Pokemon) => ({
+  const paths = results.map((pokemon : Pokemon["pokemon"]) => ({
     params: { name: pokemon.name },
   }));
 
