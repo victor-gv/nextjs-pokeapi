@@ -1,5 +1,6 @@
 import React from "react";
 import { GetStaticPaths } from "next";
+import Image from "next/image";
 
 type Types = [
   {
@@ -82,10 +83,10 @@ const Pokemon = (pokemon: Pokemon) => {
                   `}
         >
           <div className="card__image-container">
-            <img
+            <Image
               src={pokemonImg}
               alt={pokemon.pokemon.name}
-              className="card__image"
+              layout="fill"
             />
           </div>
 

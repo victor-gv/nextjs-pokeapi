@@ -97,6 +97,9 @@ a {
     border-radius: 0 0 3px 3px;
   }
   .card__image-container {
+    position: relative;
+    width: 19rem;
+    height: 18rem;
     background-color: rgba(0, 0, 0, 0.7);
     text-align: center;
     padding: 1em 1em 0;
