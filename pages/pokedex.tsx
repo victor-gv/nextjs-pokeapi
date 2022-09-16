@@ -2,9 +2,6 @@ import React from "react";
 import Pokemons from "../components/Pokemons";
 import fs from "fs";
 
-
-
-
 interface Props {
   results: [{ name: string; url: string }];
   data: [
@@ -20,12 +17,11 @@ const Pokedex = (props: Props) => {
   return (
     <>
       <Pokemons pokemon={results} types={data} />
-  
     </>
   );
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const req = await fetch(
     "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
   );
@@ -33,8 +29,6 @@ export async function getServerSideProps() {
 
   const data = fs.readFileSync("data/dataTypes.json", "utf8");
   const dataTypes = JSON.parse(data);
-
-
 
   return {
     props: {
