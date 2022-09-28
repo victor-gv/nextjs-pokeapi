@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Pokemons } from "../pages/pokedex";
+import { BiSearchAlt2 } from "react-icons/bi";
 
 const PokemonsLayout = (pokemon: Pokemons) => {
   function getType(id: number): string[] {
@@ -49,6 +50,14 @@ const PokemonsLayout = (pokemon: Pokemons) => {
         <h1 className="flex justify-center pt-10 mb-5 font-bold font-luckiest text-6xl text-yellow-300 title ">
           Pokédex
         </h1>
+        <div className="flex flex-row justify-center items-center bg-gray-800">
+          <input
+            className="w-1/2 mb-5 bg-gray-800 border-2 border-yellow-300 rounded-md text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent"
+            type="text"
+            placeholder="Search for a Pokémon"
+          />
+          <BiSearchAlt2 className="text-xl -mx-7 mb-5 text-yellow-300" />
+        </div>
         <div className="flex flex-wrap justify-center mx-10 bg-bg-main">
           {pokemonList.map((pokemon: { name: string; url: string }) => {
             const pokemonId: number = parseInt(pokemon.url.split("/")[6]);
