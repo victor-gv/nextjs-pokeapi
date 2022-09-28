@@ -96,7 +96,7 @@ const Pokemon = (pokemon: Pokemon) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className={`w-9 h-9 text-gray-800 bg-slate-100 hover:bg-yellow-200 mt-5 ml-5 rounded-full  p-2`}
+              className={`w-9 h-9 text-gray-800 bg-slate-100 hover:bg-yellow-300 mt-5 ml-5 rounded-full  p-2`}
             >
               <path
                 strokeLinecap="round"
