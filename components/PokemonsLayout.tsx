@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,7 +37,21 @@ const PokemonsLayout = (pokemon: Pokemons) => {
     dark: "bg-dark",
   };
 
-  const pokemonList = pokemon.pokemon;
+  const pokemonList: any = pokemon.pokemon;
+
+  const [results, setResults] = useState<any[]>([]);
+  const [search, setSearch] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setResults(
+      pokemonList.filter((pokemon: any) =>
+        pokemon.name.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  };
+
+  console.log(results);
 
   return (
     <>
@@ -55,8 +69,38 @@ const PokemonsLayout = (pokemon: Pokemons) => {
             className="w-1/2 mb-5 bg-gray-800 border-2 border-yellow-300 rounded-md text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent"
             type="text"
             placeholder="Search for a Pokémon"
+            onChange={handleChange}
           />
           <BiSearchAlt2 className="text-xl -mx-7 mb-5 text-yellow-300" />
+        </div>
+        <div className="relative z-10">
+          {
+            Boolean(results.length) &&
+            <div className="absolute top-0 left-0">
+              <ul className="z-50 w-full overflow-hidden bg-white border rounded-lg shadow-xl border-gray-50">
+                <li className="m-0">
+                  <Link href={`pokedex/${results[0].name}`}>
+                    <a className="block px-2 py-1 overflow-hidden text-sm font-semibold hover:bg-slate-200 text-ellipsis whitespace-nowrap">
+                      See {results.length} results for {search}
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            // {
+            // results.map(result => {
+            //   return (
+            //     <div key={result.id}>
+            //       <Link href={`pokedex/${result.name}`}>
+            //         <a className="block px-2 py-1 overflow-hidden text-sm font-semibold hover:bg-slate-200 text-ellipsis whitespace-nowrap">
+            //           {result.name}
+            //         </a>
+            //       </Link>
+            //     </div>
+            //   )
+            // })
+            // }
+          }
         </div>
         <div className="flex flex-wrap justify-center mx-10 bg-bg-main">
           {pokemonList.map((pokemon: { name: string; url: string }) => {

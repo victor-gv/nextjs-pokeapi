@@ -4,6 +4,7 @@ import PageLayout from "../../components/PageLayout";
 type Props = {};
 
 export default function Component({ query, results }: any) {
+  console.log(results)
   return (
     <>
       <PageLayout>
@@ -11,14 +12,14 @@ export default function Component({ query, results }: any) {
           <div className="flex flex-col justify-center items-center min-h-screen bg-gray-800">
             <h1 className="text-3xl font-bold mb-5 text-sky-500">Poke Api</h1>
             <div className="flex flex-col justify-center items-center min-h-screen bg-gray-800">
-              <h1 className="flex justify-center pt-10 mb-5 font-bold font-luckiest text-6xl text-yellow-300 title ">
+              <h1 className="flex justify-center pt-10 mb-5 font-bold text-3xl text-yellow-300 ">
                 Results for {query}
               </h1>
               <div className="flex flex-row justify-center items-center bg-gray-800">
                 <div className="flex flex-col justify-center items-center bg-gray-800">
                   <img
                     className="w-40 h-40"
-                    src={results.sprites.front_default}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${results.id}.png`}
                     alt={results.name}
                   />
                   <h1 className="flex justify-center pt-10 mb-5 font-bold font-luckiest text-6xl text-yellow-300 title ">
@@ -30,7 +31,7 @@ export default function Component({ query, results }: any) {
           </div>
         ) : (
           <div className="flex flex-col justify-center items-center min-h-screen bg-gray-800">
-            <h1 className="flex justify-center pt-10 mb-5 font-bold font-luckiest text-6xl text-yellow-300 title ">
+            <h1 className="flex justify-center pt-10 mb-5 font-bold text-3xl text-yellow-300">
               No results for {query}
             </h1>
           </div>
