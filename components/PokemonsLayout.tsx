@@ -64,7 +64,7 @@ const PokemonsLayout = (pokemon: Pokemons) => {
         <h1 className="flex justify-center pt-10 mb-5 font-bold font-luckiest text-6xl text-yellow-300 title ">
           Pokédex
         </h1>
-        <div className="flex flex-row justify-center items-center bg-gray-800">
+        <div className="relative flex flex-row justify-center items-center bg-gray-800">
           <input
             className="w-1/2 mb-5 bg-gray-800 border-2 border-yellow-300 rounded-md text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent"
             type="text"
@@ -72,35 +72,32 @@ const PokemonsLayout = (pokemon: Pokemons) => {
             onChange={handleChange}
           />
           <BiSearchAlt2 className="text-xl -mx-7 mb-5 text-yellow-300" />
-        </div>
-        <div className="relative z-10">
-          {
-            Boolean(results.length) &&
-            <div className="absolute top-0 left-0">
-              <ul className="z-50 w-full overflow-hidden bg-white border rounded-lg shadow-xl border-gray-50">
+
+          {Boolean(results.length) && (
+            <div className="absolute z-50 ml-9 top-11 w-1/2 mg bg-gray-800 rounded-md border-2 border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent">
+              <ul className="w-full text-yellow-300 overflow-hidden bg-gray-800">
                 <li className="m-0">
                   <Link href={`pokedex/${results[0].name}`}>
-                    <a className="block px-2 py-1 overflow-hidden text-sm font-semibold hover:bg-slate-200 text-ellipsis whitespace-nowrap">
-                      See {results.length} results for {search}
+                    <a className="block px-2 py-1 overflow-hidden text-sm font-semibold italic text-gray-400 hover:bg-gray-700 text-ellipsis whitespace-nowrap">
+                      See all {results.length} results for "{search}"
                     </a>
                   </Link>
                 </li>
+                {results.map((result) => {
+                  //return just the first 20 results
+                  if (results.indexOf(result) < 20) {
+                    return (
+                      <Link href={`pokedex/${result.name}`}>
+                        <a className="block px-2 py-1 overflow-hidden text-sm font-semibold hover:bg-gray-700 text-ellipsis whitespace-nowrap capitalize">
+                          {result.name}
+                        </a>
+                      </Link>
+                    );
+                  }
+                })}
               </ul>
             </div>
-            // {
-            // results.map(result => {
-            //   return (
-            //     <div key={result.id}>
-            //       <Link href={`pokedex/${result.name}`}>
-            //         <a className="block px-2 py-1 overflow-hidden text-sm font-semibold hover:bg-slate-200 text-ellipsis whitespace-nowrap">
-            //           {result.name}
-            //         </a>
-            //       </Link>
-            //     </div>
-            //   )
-            // })
-            // }
-          }
+          )}
         </div>
         <div className="flex flex-wrap justify-center mx-10 bg-bg-main">
           {pokemonList.map((pokemon: { name: string; url: string }) => {

@@ -40,7 +40,7 @@ a {
 @layer components {
   .pokemon-card {
     position: relative;
-    z-index: 100;
+    z-index: 40;
     height: 18rem;
     width: 12rem;
     margin: 20px;
