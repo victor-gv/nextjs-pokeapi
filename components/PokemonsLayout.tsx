@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,19 +39,34 @@ const PokemonsLayout = (pokemon: Pokemons) => {
 
   const pokemonList: any = pokemon.pokemon;
 
+  const CACHE = {};
+
   const [results, setResults] = useState<any[]>([]);
   const [search, setSearch] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    setResults(
-      pokemonList.filter((pokemon: any) =>
-        pokemon.name.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    if (e.target.value.length > 0) {
+      setSearch(e.target.value);
+      setResults(
+        pokemonList.filter((pokemon: any) =>
+          pokemon.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    } else {
+      setResults([]);
+    }
   };
 
-  console.log(results);
+  useEffect(() => {
+    if (search.length > 0) {
+      const results = pokemonList.filter((pokemon: any) =>
+        pokemon.name.toLowerCase().includes(search.toLowerCase())
+      );
+      setResults(results);
+    } else {
+      setResults([]);
+    }
+  }, [search]);
 
   return (
     <>
@@ -77,7 +92,7 @@ const PokemonsLayout = (pokemon: Pokemons) => {
             <div className="absolute z-50 ml-9 top-11 w-1/2 mg bg-gray-800 rounded-md border-2 border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent">
               <ul className="w-full text-yellow-300 overflow-hidden bg-gray-800">
                 <li className="m-0">
-                  <Link href={`pokedex/${results[0].name}`}>
+                  <Link href={`pokedex/search`} key={results.length}>
                     <a className="block px-2 py-1 overflow-hidden text-sm font-semibold italic text-gray-400 hover:bg-gray-700 text-ellipsis whitespace-nowrap">
                       See all {results.length} results for "{search}"
                     </a>
@@ -87,7 +102,7 @@ const PokemonsLayout = (pokemon: Pokemons) => {
                   //return just the first 20 results
                   if (results.indexOf(result) < 20) {
                     return (
-                      <Link href={`pokedex/${result.name}`}>
+                      <Link href={`pokedex/${result.name}`} key={result.name}>
                         <a className="block px-2 py-1 overflow-hidden text-sm font-semibold hover:bg-gray-700 text-ellipsis whitespace-nowrap capitalize">
                           {result.name}
                         </a>
