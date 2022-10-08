@@ -106,7 +106,6 @@ export default function Component({
 }
 
 export async function getServerSideProps(context: { query: Query }) {
-  console.log(typeof context);
   const { query } = context;
   const q = query.query;
 
