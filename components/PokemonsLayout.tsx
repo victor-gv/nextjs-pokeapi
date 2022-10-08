@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Pokemons } from "../pages/pokedex";
 import { BiSearchAlt2 } from "react-icons/bi";
+import { searchContext } from "../context/searchContext";
 
 const PokemonsLayout = (pokemon: Pokemons) => {
   function getType(id: number): string[] {
@@ -39,8 +40,6 @@ const PokemonsLayout = (pokemon: Pokemons) => {
 
   const pokemonList: any = pokemon.pokemon;
 
-  const CACHE = {};
-
   const [results, setResults] = useState<any[]>([]);
   const [search, setSearch] = useState("");
 
@@ -68,6 +67,16 @@ const PokemonsLayout = (pokemon: Pokemons) => {
     }
   }, [search]);
 
+  const searchCall = useContext(searchContext);
+
+  useEffect(() => {
+    searchCall.setSearchCall(results);
+  }, [results]);
+
+  useEffect(() => {
+    localStorage.setItem("searchCall", JSON.stringify(searchCall.searchCall));
+  }, [searchCall.searchCall]);
+
   return (
     <>
       <Head>
@@ -92,14 +101,13 @@ const PokemonsLayout = (pokemon: Pokemons) => {
             <div className="absolute z-50 ml-9 top-11 w-1/2 mg bg-gray-800 rounded-md border-2 border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent">
               <ul className="w-full text-yellow-300 overflow-hidden bg-gray-800">
                 <li className="m-0">
-                  <Link href={`pokedex/search`} key={results.length}>
-                    <a className="block px-2 py-1 overflow-hidden text-sm font-semibold italic text-gray-400 hover:bg-gray-700 text-ellipsis whitespace-nowrap">
+                  <Link href={`/search?query=${search}`} key={results.length}>
+                    <a className="block px-2 py-1 overflow-hidden text-sm font-semibold italic text-gray-400 hover:bg-gray-700 hover:cursor-pointer text-ellipsis whitespace-nowrap">
                       See all {results.length} results for "{search}"
                     </a>
                   </Link>
                 </li>
                 {results.map((result) => {
-                  //return just the first 20 results
                   if (results.indexOf(result) < 20) {
                     return (
                       <Link href={`pokedex/${result.name}`} key={result.name}>
