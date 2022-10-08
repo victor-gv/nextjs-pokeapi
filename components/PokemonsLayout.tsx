@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Pokemons } from "../pages/pokedex";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { searchContext } from "../context/searchContext";
 
 const PokemonsLayout = (pokemon: Pokemons) => {
   function getType(id: number): string[] {
@@ -67,15 +66,7 @@ const PokemonsLayout = (pokemon: Pokemons) => {
     }
   }, [search]);
 
-  const searchCall = useContext(searchContext);
 
-  useEffect(() => {
-    searchCall.setSearchCall(results);
-  }, [results]);
-
-  useEffect(() => {
-    localStorage.setItem("searchCall", JSON.stringify(searchCall.searchCall));
-  }, [searchCall.searchCall]);
 
   return (
     <>
