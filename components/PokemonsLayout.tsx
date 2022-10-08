@@ -5,6 +5,18 @@ import Link from "next/link";
 import { Pokemons } from "../pages/pokedex";
 import { BiSearchAlt2 } from "react-icons/bi";
 
+type pokemonList = [
+  {
+    name: string;
+    url: string;
+  }
+];
+
+type pokemon = {
+  name: string;
+  url: string;
+};
+
 const PokemonsLayout = (pokemon: Pokemons) => {
   function getType(id: number): string[] {
     const type = pokemon.types.find((type) => type.id === id);
@@ -37,16 +49,16 @@ const PokemonsLayout = (pokemon: Pokemons) => {
     dark: "bg-dark",
   };
 
-  const pokemonList: any = pokemon.pokemon;
+  const pokemonList: pokemonList = pokemon.pokemon;
 
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<pokemon[]>([]);
   const [search, setSearch] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 0) {
       setSearch(e.target.value);
       setResults(
-        pokemonList.filter((pokemon: any) =>
+        pokemonList.filter((pokemon: pokemon) =>
           pokemon.name.toLowerCase().includes(search.toLowerCase())
         )
       );
@@ -57,7 +69,7 @@ const PokemonsLayout = (pokemon: Pokemons) => {
 
   useEffect(() => {
     if (search.length > 0) {
-      const results = pokemonList.filter((pokemon: any) =>
+      const results = pokemonList.filter((pokemon: pokemon) =>
         pokemon.name.toLowerCase().includes(search.toLowerCase())
       );
       setResults(results);
@@ -65,8 +77,6 @@ const PokemonsLayout = (pokemon: Pokemons) => {
       setResults([]);
     }
   }, [search]);
-
-
 
   return (
     <>

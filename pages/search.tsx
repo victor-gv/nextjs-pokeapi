@@ -3,12 +3,34 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-export default function Component({ query, pokemonList }: any) {
-  const [searchResults, setSearchResults] = useState([]);
+interface Query {
+  query: string;
+}
+
+type pokemonList = [
+  {
+    name: string;
+    url: string;
+  }
+];
+
+type pokemon = {
+  name: string;
+  url: string;
+};
+
+export default function Component({
+  query,
+  pokemonList,
+}: {
+  query: string;
+  pokemonList: pokemonList;
+}) {
+  const [searchResults, setSearchResults] = useState<pokemon[]>([]);
 
   useEffect(() => {
     if (query.length > 0) {
-      const results = pokemonList.filter((pokemon: any) =>
+      const results = pokemonList.filter((pokemon: pokemon) =>
         pokemon.name.toLowerCase().includes(query.toLowerCase())
       );
       setSearchResults(results);
@@ -50,7 +72,7 @@ export default function Component({ query, pokemonList }: any) {
         </h1>
         <div className="flex flex-wrap justify-center bg-gray-800">
           {searchResults.length > 0 ? (
-            searchResults.map((pokemon: any) => (
+            searchResults.map((pokemon: pokemon) => (
               <div
                 key={pokemon.name}
                 className="flex flex-col items-center justify-center font-bold p-5 bg-gray-700 rounded-lg m-2 hover:bg-yellow-400 hover:text-gray-800"
@@ -83,7 +105,8 @@ export default function Component({ query, pokemonList }: any) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: { query: Query }) {
+  console.log(typeof context);
   const { query } = context;
   const q = query.query;
 
