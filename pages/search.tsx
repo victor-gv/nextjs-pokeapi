@@ -2,22 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
-interface Query {
-  query: string;
-}
-
-type pokemonList = [
-  {
-    name: string;
-    url: string;
-  }
-];
-
-type pokemon = {
-  name: string;
-  url: string;
-};
+import { Query } from "../interfaces/interfaces";
+import { pokemon, pokemonList } from "../interfaces/interfaces";
 
 export default function Component({
   query,
@@ -85,6 +71,7 @@ export default function Component({
                           pokemon.url.split("/")[6]
                         }.png`}
                         alt={pokemon.name}
+                        priority
                         width={100}
                         height={100}
                       />

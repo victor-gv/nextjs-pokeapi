@@ -2,22 +2,12 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { Pokemons } from "../pages/pokedex";
+import { PokemonsData, pokemon, pokemonList } from "../interfaces/interfaces";
 import { BiSearchAlt2 } from "react-icons/bi";
 
-type pokemonList = [
-  {
-    name: string;
-    url: string;
-  }
-];
 
-type pokemon = {
-  name: string;
-  url: string;
-};
 
-const PokemonsLayout = (pokemon: Pokemons) => {
+const PokemonsLayout = (pokemon: PokemonsData) => {
   function getType(id: number): string[] {
     const type = pokemon.types.find((type) => type.id === id);
     if (typeof type !== "undefined") {
@@ -141,6 +131,7 @@ const PokemonsLayout = (pokemon: Pokemons) => {
                       alt={pokemon.name}
                       width={100}
                       height={100}
+                      priority
                     />
                   </div>
                   <div className="circle"></div>

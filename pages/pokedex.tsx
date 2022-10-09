@@ -1,18 +1,10 @@
 import React from "react";
 import Pokemons from "../components/PokemonsLayout";
 import fs from "fs";
+import { PokemonsData } from "../interfaces/interfaces";
 
-export interface Pokemons {
-  pokemon: [{ name: string; url: string }];
-  types: [
-    {
-      id: number;
-      types: string[];
-    }
-  ];
-}
 
-const Pokedex = (props: Pokemons) => {
+const Pokedex = (props: PokemonsData) => {
   const { pokemon, types } = props;
   return (
     <>
