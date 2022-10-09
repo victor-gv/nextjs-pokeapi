@@ -54,7 +54,7 @@ export default function Component({
       </div>
       <div className="bg-gray-800 h-screen">
         <h1 className="flex justify-center pt-10 mb-10 font-bold text-6xl text-yellow-300 title">
-          Search for "{query}"
+          Search results for "{query}"
         </h1>
         <div className="flex flex-wrap justify-center bg-gray-800">
           {searchResults.length > 0 ? (

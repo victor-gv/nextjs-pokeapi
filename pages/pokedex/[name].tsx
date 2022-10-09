@@ -114,7 +114,12 @@ const Pokemon = (pokemon: Pokemon) => {
                   `}
         >
           <div className="card__image-container">
-            <Image src={pokemonImg} alt={pokemon.pokemon.name} priority layout="fill" />
+            <Image
+              src={pokemonImg}
+              alt={pokemon.pokemon.name}
+              priority
+              layout="fill"
+            />
           </div>
 
           <figcaption className="card__caption">

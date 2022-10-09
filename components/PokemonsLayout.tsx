@@ -5,8 +5,6 @@ import Link from "next/link";
 import { PokemonsData, pokemon, pokemonList } from "../interfaces/interfaces";
 import { BiSearchAlt2 } from "react-icons/bi";
 
-
-
 const PokemonsLayout = (pokemon: PokemonsData) => {
   function getType(id: number): string[] {
     const type = pokemon.types.find((type) => type.id === id);
@@ -121,9 +119,9 @@ const PokemonsLayout = (pokemon: PokemonsData) => {
               <Link key={pokemon.name} href={`/pokedex/${pokemon.name}`}>
                 <div
                   key={pokemon.name}
-                  className={`flex flex-col justify-center items-center pokemon-card hover:scale-105 bg-
+                  className={`flex flex-col justify-center items-center pokemon-card bg-
                   ${bgColors[getType(pokemonId)[0]]}
-                  `}
+                  hover:border-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-110 transition duration-700 ease-in-out`}
                 >
                   <div className="mb-1">
                     <Image
